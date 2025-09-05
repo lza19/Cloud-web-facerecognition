@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 import io
 from mtcnn.mtcnn import MTCNN
-from pinecone.grpc import PineconeGRPC as Pinecone
+from pinecone import Pinecone
 
 model_path = "model/modelmodify10000e15.h5"
 
