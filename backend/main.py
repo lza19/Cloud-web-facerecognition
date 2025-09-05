@@ -6,7 +6,23 @@ from PIL import Image
 import io
 from mtcnn.mtcnn import MTCNN
 from pinecone import Pinecone
+from fastapi import FastAPI, Form, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+import pinecone
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_ENV = os.getenv("PINECONE_ENV") 
+INDEX_NAME = os.getenv("INDEX_NAME")
+#print("PINECONE_API_KEY:", PINECONE_API_KEY)
+
+pc = Pinecone(api_key=PINECONE_API_KEY)
+index = pc.Index(INDEX_NAME)
+embedding = np.random.rand(128).tolist()
+user_id = "user1"
+index.upsert(vectors=[(user_id, embedding)])
 model_path = "model/modelmodify10000e15.h5"
 
 try:
@@ -66,16 +82,16 @@ def getembeddingtf(image_data):
         x, y, width, height = faces[0]['box'] # เลือกหน้า 0
         face_img = img.crop((x, y, x + width, y + height))
 
-        # Convert to TensorFlow Tensor
+        # Convert to Tensor
         face_tensor = tf.convert_to_tensor(np.array(face_img))
 
-        # Resize the cropped face to 160x160 with TensorFlow
+        # 160x160 with TensorFlow
         face_tensor = tf.image.resize(face_tensor, (160, 160))
         
-        # Add a dimension for batch size
+
         face_tensor = tf.expand_dims(face_tensor, axis=0)
 
-        # Normalize the pixel values
+ 
         face_tensor = face_tensor / 255.0
          
         face_tensor = face_tensor.astype(np.float32)
@@ -95,7 +111,13 @@ def getembeddingtf(image_data):
 print("veg1")
 from fastapi import FastAPI, UploadFile, File
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"], #http://127.0.0.1:5500
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 @app.get("/")
 def read_root():
     return {"Hello": "Worldsss"}
@@ -105,3 +127,9 @@ async def register(name: str, file: UploadFile = File(...)):
     image_data = await file.read() #await ทำงานตลอด .read อ่านข้อมูลดิบยังใช้ไม่ได้ที่รับมาและเก็บไว้ในตัวแปร
     embedding = getembeddingtf(image_data)
     return {"message": f"User {name} registered with embedding of size {len(embedding)}"}
+
+@app.post("/upload")
+async def upload(name: str = Form(...), image: UploadFile = File(...)):
+    print(name)
+    print(image.filename)
+    return {"name": name, "filename": image.filename}
