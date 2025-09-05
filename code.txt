@@ -1,1 +1,4 @@
-มาเริ่มฉันจะทำหน้า 2 หน้า คือลงทะเบียนเอา embedding ไปเก็บก่อน และอีกหน้าคือทดสอบว่าเมื่อถ่ายหน้าไปจะมี embedding ของหน้าเราใน database ไหม คือเอาไปเทียบ อะ ฉันจะทำหน้าแรกของ คือ หน้าแรกสุดไม่เกี่ยวกับ 2 หน้านั้นนะ มันจะเป็ฯหน้าทางแยกมี 2 ปุ่มให้กด คือ ตอนนี้เสร็จแล้ว registerและverify ฉันจะทำหน้า register ก่อนคือ เมื่อกดเข้าไปมันจะให้เราใส่ชื่อก่อนและใส่แล้วมันจะไปต่อหน้าเปิดกล่องให้ถ่ายรูปเลย ทำไง
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+googleapis-common-protos 1.70.0 requires protobuf!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<7.0.0,>=3.20.2, but you have protobuf 3.19.0 which is incompatible.
+protoc-gen-openapiv2 0.0.1 requires protobuf>=4.21.0, but you have protobuf 3.19.0 which is incompatible.
