@@ -11,8 +11,16 @@ from fastapi.middleware.cors import CORSMiddleware
 import pinecone
 import os
 from dotenv import load_dotenv
-load_dotenv()
 
+model_path = "model/modelmodify10000e15.h5"
+try:
+    model = load_model(model_path)
+    print("1666 model compled")
+except Exception as e:
+    print(f"Error loading model: {e}")
+    facenet_model = None
+
+load_dotenv()
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_ENV = os.getenv("PINECONE_ENV") 
 INDEX_NAME = os.getenv("INDEX_NAME")
@@ -20,17 +28,13 @@ INDEX_NAME = os.getenv("INDEX_NAME")
 
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index = pc.Index(INDEX_NAME)
-embedding = np.random.rand(128).tolist()
+'''embedding = np.random.rand(128).tolist()
 user_id = "user1"
-index.upsert(vectors=[(user_id, embedding)])
-model_path = "model/modelmodify10000e15.h5"
+index.upsert(vectors=[(user_id, embedding)])'''
 
-try:
-    facenet_model = load_model(model_path)
-    print("1666 model compled")
-except Exception as e:
-    print(f"Error loading model: {e}")
-    facenet_model = None
+def resufl(intx):
+    if intx > 8:
+        return True   
 
 detector = MTCNN()
 # PIL
@@ -56,7 +60,7 @@ def getembeddingpil(image_data):
         
         face_array = (face_array / 255.0).astype(np.float32)
         
-        embedding = facenet_model.predict(face_array, verbose=0)
+        embedding = model.predict(face_array, verbose=0)
         
         return embedding[0].tolist()
     except Exception as e:
@@ -98,16 +102,24 @@ def getembeddingtf(image_data):
 
         face_tensor = tf.clip_by_value(face_tensor, 0.0, 1.0)
         # Get the embedding
-        embedding = facenet_model.predict(face_tensor) #(1, 128) ซึ่งหมายถึง "1 แถว, 128 คอลัมน์" # verbose=0
+        #embedding = model.predict(face_tensor) #(1, 128) ซึ่งหมายถึง "1 แถว, 128 คอลัมน์" # verbose=0
         
-        return embedding[0].tolist() # ข้อมูล 1,128 คือ 2 มิติ เราจะทำให้เหลือแค่ 1 มิติ คือ 128 เลือก [] ออกมาจาก [[]] 
+        return face_tensor #embedding[0].tolist() # ข้อมูล 1,128 คือ 2 มิติ เราจะทำให้เหลือแค่ 1 มิติ คือ 128 เลือก [] ออกมาจาก [[]] 
         # embedding[0] = รูปแบบ NumPy array
         # .tolist() จะแปลง NumPy array นั้นให้กลายเป็น Python list 
 
     except Exception as e:
         print(f"Error getting embedding: {e}")
         return None
-    
+
+@tf.function
+def predict_embedding(face_tensor):
+    em = model(face_tensor)
+    em = em[0] #ตัดมิติ
+    return em  
+
+
+
 print("veg1")
 from fastapi import FastAPI, UploadFile, File
 app = FastAPI()
@@ -118,6 +130,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 @app.get("/")
 def read_root():
     return {"Hello": "Worldsss"}

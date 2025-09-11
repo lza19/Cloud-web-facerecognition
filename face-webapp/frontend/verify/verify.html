@@ -5,10 +5,29 @@
   <link rel="stylesheet" href="css/veri.css">
 </head>
 <body>
-  <h1>ยืนยันตัสวตน</h1>
-  <a href="index.html">ฟฟฟฟฟ</a>
-  <video id="videoVerify" width="320" height="240" class="video1"></video>
-  <button id="captureVerifyBtn">ถ่ายภาพ</button>
+  <div class="to">
+    <a href="../../index.html" id="back">กลับ</a>
+  </div>
+  <div class="tomain">
+    <div class="topic" >
+      <h1>ยืนยันตัวตน</h1>
+    </div>
+    <div class="topic2">
+    </div>
+  </div>
+  <div class="s">
+    <div class="video">
+      <video id="videoVerify" width="400" height="300" class="video1" autoplay playsinline></video>
+    </div>
+    <div class="resulvideo">
+      <canvas id="canvas" width="400" height="300" style="display:none;"></canvas>
+      <img id="photo" src="" alt="รูปของคุณจะอยู่ที่นี่" style="display:none;">
+    </div>
+  </div>
+  <div class="button">
+    <button id="captureVerifyBtn1" class="button1">ถ่ายภาพ</button>
+    <button id="captureVerifyBtn2" class="button2">เทียบ</button>
+  </div>
 <h1>VEG</h1>
 <h1>VEG</h1>
   <script src="verify.js"></script>
