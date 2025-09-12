@@ -12,7 +12,8 @@ import pinecone
 import os
 from dotenv import load_dotenv
 
-model_path = "model/modelmodify10000e15.h5"
+
+model_path = "model/modelR44.h5"
 try:
     model = load_model(model_path)
     print("1666 model compled")
@@ -32,9 +33,6 @@ index = pc.Index(INDEX_NAME)
 user_id = "user1"
 index.upsert(vectors=[(user_id, embedding)])'''
 
-def resufl(intx):
-    if intx > 8:
-        return True   
 
 detector = MTCNN()
 # PIL
@@ -70,7 +68,7 @@ def getembeddingpil(image_data):
 #TensorFlow
 def getembeddingtf(image_data):
     try:
-        img = Image.open(io.BytesIO(image_data)) 
+        img = Image.open(io.BytesIO(image_data)).convert("RGB")
         # ได้รับ byte มา 1 io.BytesIO สร้างไฟล์เสมือนโดยใช้ข้อมูลที่ได้รับมา เอาข้อมูลดิบมาสร้างทำให้อ่านได้
 
         img_array = np.asarray(img) #ตรวจว่าเป็น array ไหม ถ้าไม่ แปลงเป็นarray
@@ -90,15 +88,14 @@ def getembeddingtf(image_data):
         face_tensor = tf.convert_to_tensor(np.array(face_img))
 
         # 160x160 with TensorFlow
-        face_tensor = tf.image.resize(face_tensor, (160, 160))
+        face_tensor = tf.image.resize(face_tensor, (224, 224))
         
 
         face_tensor = tf.expand_dims(face_tensor, axis=0)
-
  
         face_tensor = face_tensor / 255.0
-         
-        face_tensor = face_tensor.astype(np.float32)
+        
+        face_tensor = tf.cast(face_tensor, tf.float32)
 
         face_tensor = tf.clip_by_value(face_tensor, 0.0, 1.0)
         # Get the embedding
@@ -116,9 +113,7 @@ def getembeddingtf(image_data):
 def predict_embedding(face_tensor):
     em = model(face_tensor)
     em = em[0] #ตัดมิติ
-    return em  
-
-
+    return em
 
 print("veg1")
 from fastapi import FastAPI, UploadFile, File
@@ -143,6 +138,46 @@ async def register(name: str, file: UploadFile = File(...)):
 
 @app.post("/upload")
 async def upload(name: str = Form(...), image: UploadFile = File(...)):
+    image_data = await image.read()
     print(name)
     print(image.filename)
-    return {"name": name, "filename": image.filename}
+    a = getembeddingtf(image_data)
+    print(a)
+    print(a.shape)
+    em = predict_embedding(a)
+    em = em.numpy().tolist()
+    user_id = name
+    index.upsert(vectors=[(user_id, em)])
+    #print(em)
+    #print(type(em))
+    return {}
+
+@app.post("/vertify")
+async def upload( image: UploadFile = File(...)):
+    image_data = await image.read()
+    print(image.filename)
+    a = getembeddingtf(image_data)
+    print(a)
+    print(a.shape)
+    em = predict_embedding(a)
+    em = em.numpy().tolist()
+    #embedding = np.random.rand(128).tolist()
+    print(image.filename)
+    query_response = index.query(
+    vector=em,
+    top_k=3,       
+    include_values=True,  
+    include_metadata=True 
+    )
+    
+    if query_response['matches']:
+        match = query_response['matches'][0]
+        result = {
+            "id": match['id'],         # user_id
+            "score": match['score'],   # ความใกล้เคียง
+            "metadata": match.get('metadata', {})  # metadata ถ้ามี
+        }
+    else:
+        result = {"id": None, "score": 9999, "metadata": {}}
+    
+    return result

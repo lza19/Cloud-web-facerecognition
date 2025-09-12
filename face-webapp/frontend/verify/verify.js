@@ -3,6 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const captureBtn = document.getElementById('captureVerifyBtn1');
     const canvas = document.getElementById('canvas');
     const photo = document.getElementById('photo');
+    const captureVerifyBtn2 = document.getElementById('captureVerifyBtn2');
+
+    let imageData = null;
+
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
             videoVerify.srcObject = stream;
@@ -26,4 +30,33 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Captured Image:", imageData);
         
     });
+
+        function base64ToBlob(base64) {
+        const byteString = atob(base64.split(',')[1]);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const intArray = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) {
+            intArray[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([intArray], { type: 'image/png' });
+    }
+
+    captureVerifyBtn2.addEventListener('click',()=>{
+        if (!imageData){
+            return alert('4k')
+        }
+        const imageBlob = base64ToBlob(imageData);
+
+        console.log(imageBlob)
+        const formData = new FormData();
+        formData.append("image", imageBlob, "photo.png");
+
+        fetch("http://localhost:8000/vertify", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => console.log("Server response:", data));
+
+    })
 });

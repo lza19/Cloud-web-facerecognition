@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // แสดงภาพใน <img>
         photo.src = imageData;
-
+        photo.style.display = 'block';
         // เก็บตัวแปร
         console.log("Captured Image:", imageData);
         
@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     saveinput.addEventListener('click',()=>{
         if (!username) { 
-            return alert("sd");
+            return alert("ใส่ชื่อ");
         }
         if (!imageData){
-            return alert('4k')
+            return alert('ถ่ายรูป')
         }
         const imageBlob = base64ToBlob(imageData);
 
@@ -67,10 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
             body: formData
         })
         .then(res => res.json())
-        .then(data => console.log("Server response:", data));
+        .then(data => console.log("Server response:", data))
+        .catch(error => console.error(error));
 
     })
-    
-
 
 });

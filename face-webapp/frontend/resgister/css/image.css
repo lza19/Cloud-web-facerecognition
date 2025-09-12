@@ -1,0 +1,87 @@
+/* -- จัดองค์ประกอบหลักให้อยู่กึ่งกลาง -- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8; /* สีพื้นหลังอ่อนๆ */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* ทำให้ body สูงเต็มหน้าจอ */
+    margin: 0;
+    color: #333;
+    text-align: center;
+}
+
+/* -- สไตล์ของ h1 -- */
+h1 {
+    color: #007bff;
+    margin-bottom: 25px;
+    font-size: 2.2em;
+    border-bottom: 2px solid #e0f2f7;
+    padding-bottom: 15px;
+}
+
+/* -- สไตล์ของวิดีโอ -- */
+video {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border: 3px solid #007bff;
+    border-radius: 8px;
+    background-color: #f0f8ff;
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
+/* -- สไตล์ของรูปภาพที่ถ่ายได้ -- */
+img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border: 3px solid #28a745; 
+    border-radius: 8px;
+    margin: 20px auto;
+}
+
+/* -- สไตล์ของปุ่ม -- */
+button {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 10px;
+    min-width: 150px;
+}
+
+/* -- สีของปุ่มถ่ายภาพ -- */
+#cap {
+    background-color: #007bff;
+    color: white;
+}
+
+#cap:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* -- สีของปุ่มบันทึก -- */
+#saveinput {
+    background-color: #28a745;
+    color: white;
+}
+
+#saveinput:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* -- สไตล์ของข้อความชื่อ -- */
+#showName {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}

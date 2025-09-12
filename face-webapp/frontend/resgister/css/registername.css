@@ -1,0 +1,31 @@
+body {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    font-size: 10px;
+}
+
+.back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.bname {
+    background-color: rgb(255, 255, 255);
+    width: 230px;
+    margin: 0px;
+}
+
+input, button {
+    margin: 5px; 
+}
