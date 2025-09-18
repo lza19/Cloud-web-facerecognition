@@ -1,0 +1,8 @@
+tensorflow==2.10.0
+numpy==1.23.5
+fastapi
+"uvicorn[standard]"
+pinecone
+mtcnn
+opencv-python==4.8.0.74
+mangum

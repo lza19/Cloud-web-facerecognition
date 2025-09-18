@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(255, 255, 255);
+    background-color: #262727;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,7 +10,7 @@ body {
 }
 
 h1 {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-size: 10px;
 }
 
@@ -21,7 +21,7 @@ h1 {
 }
 
 .bname {
-    background-color: rgb(255, 255, 255);
+    background-color: #262727;
     width: 230px;
     margin: 0px;
 }

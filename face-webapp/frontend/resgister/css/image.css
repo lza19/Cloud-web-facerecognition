@@ -1,7 +1,7 @@
 /* -- จัดองค์ประกอบหลักให้อยู่กึ่งกลาง -- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f4f8; /* สีพื้นหลังอ่อนๆ */
+    background-color: #262727; /* สีพื้นหลังอ่อนๆ */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -81,7 +81,7 @@ button {
 #showName {
     font-size: 1.3em;
     font-weight: bold;
-    color: #555;
+    color: #fcf3f3;
     margin-top: 20px;
     margin-bottom: 15px;
 }

@@ -4,9 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('canvas');
     const photo = document.getElementById('photo');
     const captureVerifyBtn2 = document.getElementById('captureVerifyBtn2');
-
+    const result = document.getElementById('result');
     let imageData = null;
 
+    console.log(result)
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
             videoVerify.srcObject = stream;
@@ -55,8 +56,25 @@ document.addEventListener('DOMContentLoaded', () => {
             method: "POST",
             body: formData
         })
-        .then(res => res.json())
-        .then(data => console.log("Server response:", data));
+        .then(res => {
+            if(!res.ok){
+                alert("ส่งข้อมูลไม่สำเร็จ");
+            }
+            //if(res.ok){
+                //alert("ส่งข้อมูลสำเร็จ");
+            //}
+            console.log("Response Object:", res);
+            return res.json();
+        })
+        .then(data => {
+            console.log("Server response:", data.id)
+            result.textContent = `ชื่อลำดับ 1 ${data.id}`;
+        }
+        )
+        .catch(error => {
+            alert("ไม่สามารถตรวจจับใบหนาได้");
+            console.log("Response Object:", error);
+        })
 
     })
 });

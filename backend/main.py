@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import pinecone
 import os
 from dotenv import load_dotenv
+from mangum import Mangum
 
 
 model_path = "model/modelR44.h5"
@@ -90,7 +91,6 @@ def getembeddingtf(image_data):
         # 160x160 with TensorFlow
         face_tensor = tf.image.resize(face_tensor, (224, 224))
         
-
         face_tensor = tf.expand_dims(face_tensor, axis=0)
  
         face_tensor = face_tensor / 255.0
@@ -118,9 +118,10 @@ def predict_embedding(face_tensor):
 print("veg1")
 from fastapi import FastAPI, UploadFile, File
 app = FastAPI()
+handler = Mangum(app)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"], #http://127.0.0.1:5500
+    allow_origins=["http://127.0.0.1:5501"], #http://127.0.0.1:5500
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -147,10 +148,10 @@ async def upload(name: str = Form(...), image: UploadFile = File(...)):
     em = predict_embedding(a)
     em = em.numpy().tolist()
     user_id = name
-    index.upsert(vectors=[(user_id, em)])
+    #index.upsert(vectors=[(user_id, em)])
     #print(em)
     #print(type(em))
-    return {}
+    return {"name":user_id}
 
 @app.post("/vertify")
 async def upload( image: UploadFile = File(...)):

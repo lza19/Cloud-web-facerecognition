@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const showName= document.getElementById("showName");
     const saveinput= document.getElementById("saveinput");
-
+    const loadingOverlay = document.getElementById('loadingOverlay');
     const username = params.get("name");
     console.log(saveinput);
     console.log(username);
@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!imageData){
             return alert('ถ่ายรูป')
         }
+        //loadingOverlay.style.display = 'flex';
         const imageBlob = base64ToBlob(imageData);
 
         console.log(imageBlob)
@@ -66,9 +67,26 @@ document.addEventListener('DOMContentLoaded', () => {
             method: "POST",
             body: formData
         })
-        .then(res => res.json())
+        .then(res => {
+            if(!res.ok){
+                alert("ส่งข้อมูลสำเร็จ");
+            }
+            if(res.ok){
+                alert("ส่งข้อมูลสำเร็จ");
+            }
+            console.log("Response Object:", res);
+            return res.json();
+        })
+
         .then(data => console.log("Server response:", data))
-        .catch(error => console.error(error));
+        .catch(error => {
+            alert("ไม่สามารถตรวจจับใบหนาได้");
+            console.log("Response Object:", error);
+        })
+        //.finally(() => {
+            // ปิด loading overlay ไม่ว่าจะสำเร็จหรือล้มเหลว
+            //loadingOverlay.style.display = 'none';
+        //});
 
     })
 
