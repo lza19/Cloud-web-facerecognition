@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append("image", imageBlob, "photo.png");
 
-        fetch("http://localhost:8000/vertify", {
+        fetch("https://vmzr4gezhxh7d2txyxktgpv2jq0cyhnb.lambda-url.ap-southeast-1.on.aws/vertify", {
             method: "POST",
             body: formData
         })
@@ -68,11 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             console.log("Server response:", data.id)
-            result.textContent = `ชื่อลำดับ 1 ${data.id}`;
+            result.textContent = `ชื่อลำดับ 1 ${data.id} Cosine ${data.score}`;
         }
         )
         .catch(error => {
-            alert("ไม่สามารถตรวจจับใบหนาได้");
+            alert("ไม่สามารถตรวจจับใบsssหนาได้");
             console.log("Response Object:", error);
         })
 

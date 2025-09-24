@@ -114,14 +114,18 @@ def predict_embedding(face_tensor):
     em = model(face_tensor)
     em = em[0] #ตัดมิติ
     return em
+origin_url = os.environ.get("WEB")
 
 print("veg1")
 from fastapi import FastAPI, UploadFile, File
+
+
 app = FastAPI()
 handler = Mangum(app)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5501"], #http://127.0.0.1:5500
+    allow_origins=["https://cloud-project-six-rho.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -148,9 +152,9 @@ async def upload(name: str = Form(...), image: UploadFile = File(...)):
     em = predict_embedding(a)
     em = em.numpy().tolist()
     user_id = name
-    #index.upsert(vectors=[(user_id, em)])
-    #print(em)
-    #print(type(em))
+    index.upsert(vectors=[(user_id, em)])
+    print(em)
+    print(type(em))
     return {"name":user_id}
 
 @app.post("/vertify")
