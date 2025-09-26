@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append("name", username);
         formData.append("image", imageBlob, "photo.png");
 
-        fetch("http://localhost:8000/upload", {
+        fetch("https://ec2-52-74-118-144.ap-southeast-1.compute.amazonaws.com:8000/upload", {
             method: "POST",
             body: formData
         })
