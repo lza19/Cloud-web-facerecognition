@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             method: "POST",
             body: formData
         })
-
+        
         .then(res => {
             if(!res.ok){
                 alert("ส่งข้อมูลสำเร็จ");
