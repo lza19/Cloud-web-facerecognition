@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append("image", imageBlob, "photo.png");
 
-        fetch("http://ec2-18-136-208-92.ap-southeast-1.compute.amazonaws.com:8000/vertify", {
+        fetch("https://ec2-18-136-208-92.ap-southeast-1.compute.amazonaws.com:8000/vertify", {
             method: "POST",
             body: formData
         })
