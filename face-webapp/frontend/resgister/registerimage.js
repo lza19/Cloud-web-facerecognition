@@ -63,10 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append("name", username);
         formData.append("image", imageBlob, "photo.png");
 
-        fetch("http://localhost:8000/upload", {
+        fetch("http://ec2-54-179-181-172.ap-southeast-1.compute.amazonaws.com:8000/upload", {
             method: "POST",
             body: formData
         })
+
         .then(res => {
             if(!res.ok){
                 alert("ส่งข้อมูลสำเร็จ");
