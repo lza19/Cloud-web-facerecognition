@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append("name", username);
         formData.append("image", imageBlob, "photo.png");
 
-        fetch("https://localhost:8000/upload", {
+        fetch("http://localhost:8000/upload", {
             method: "POST",
             body: formData
         })
