@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append("image", imageBlob, "photo.png");
 
-        fetch("http://ec2-52-74-118-144.ap-southeast-1.compute.amazonaws.com:8000/vertify", {
+        fetch("https://ec2-52-74-118-144.ap-southeast-1.compute.amazonaws.com:8000/vertify", {
             method: "POST",
             body: formData
         })
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         )
         .catch(error => {
-            alert("ไม่สามารถตรวจจับใบsssหนาได้");
+            alert("ไม่สามารถเชื่ม่อมต่อเซิร์ฟเวอร์ได้");
             console.log("Response Object:", error);
         })
 
