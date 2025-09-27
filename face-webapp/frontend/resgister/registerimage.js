@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append("name", username);
         formData.append("image", imageBlob, "photo.png");
 
-        fetch("http://ec2-18-139-255-249.ap-southeast-1.compute.amazonaws.com:8000/upload", {
+        fetch("https://vegz.duckdns.org/upload", {
             method: "POST",
             body: formData
         })
