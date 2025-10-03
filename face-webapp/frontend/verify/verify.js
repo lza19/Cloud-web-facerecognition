@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("ไม่สามารถเปิดกล้องได้:", err);
         });
 
+
+
     captureBtn.addEventListener('click', () => {
         const context = canvas.getContext('2d');
         context.drawImage(videoVerify, 0, 0, canvas.width, canvas.height);
-
-        
         imageData = canvas.toDataURL('image/png');
         
         // แสดงภาพใน <img>
