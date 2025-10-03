@@ -1,87 +1,246 @@
-/* -- จัดองค์ประกอบหลักให้อยู่กึ่งกลาง -- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #262727; /* สีพื้นหลังอ่อนๆ */
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 30px;
+}
+
+/* Loading Overlay */
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    display: none;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* ทำให้ body สูงเต็มหน้าจอ */
-    margin: 0;
-    color: #333;
+    flex-direction: column;
+}
+
+#loadingOverlay p {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #000000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ปุ่มกลับ */
+.back {
+    width: 100%;
+    max-width: 900px;
+    align-self: flex-start;
+}
+
+#back {
+    display: inline-block;
+    padding: 12px 24px;
+    background: rgb(255, 255, 255);
+    color: #000000;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+#back:hover {
+    background: #f0f4ff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* หัวข้อ */
+h1 {
+    color: rgb(0, 0, 0);
+    font-size: 2.5em;
+    text-align: center;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+/* Container วิดีโอและรูป */
+body > div:nth-of-type(3),
+body > div:nth-of-type(4) {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* วิดีโอ */
+#videoRegister {
+    border-radius: 15px;
+    border: 4px solid #000000;
+    display: block;
+}
+
+/* Canvas และรูป */
+#canvas {
+    border-radius: 15px;
+}
+
+#photo {
+    border-radius: 15px;
+    border: 4px solid #000000;
+    max-width: 400px;
+    height: 300px;
+    object-fit: cover;
+}
+
+#showName {
+    margin-top: 15px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #000000;
     text-align: center;
 }
 
-/* -- สไตล์ของ h1 -- */
-h1 {
-    color: #007bff;
-    margin-bottom: 25px;
-    font-size: 2.2em;
-    border-bottom: 2px solid #e0f2f7;
-    padding-bottom: 15px;
+/* ปุ่ม */
+body > div:last-of-type {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-/* -- สไตล์ของวิดีโอ -- */
-video {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border: 3px solid #007bff;
-    border-radius: 8px;
-    background-color: #f0f8ff;
-    display: block;
-    margin: 0 auto 20px auto;
-}
-
-/* -- สไตล์ของรูปภาพที่ถ่ายได้ -- */
-img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border: 3px solid #28a745; 
-    border-radius: 8px;
-    margin: 20px auto;
-}
-
-/* -- สไตล์ของปุ่ม -- */
-button {
-    padding: 12px 25px;
-    font-size: 1.1em;
+#cap, #saveinput {
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin: 10px;
-    min-width: 150px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    min-width: 180px;
 }
 
-/* -- สีของปุ่มถ่ายภาพ -- */
 #cap {
-    background-color: #007bff;
+    background: linear-gradient(135deg, #000000 0%, #535353 100%);
     color: white;
 }
 
 #cap:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
 }
 
-/* -- สีของปุ่มบันทึก -- */
 #saveinput {
-    background-color: #28a745;
+    background: linear-gradient(135deg, #000000 0%, #353535 100%);
     color: white;
 }
 
 #saveinput:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(79, 172, 254, 0.4);
 }
 
-/* -- สไตล์ของข้อความชื่อ -- */
-#showName {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #fcf3f3;
-    margin-top: 20px;
-    margin-bottom: 15px;
+#cap:active, #saveinput:active {
+    transform: translateY(-1px);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.back {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+h1 {
+    animation: fadeInUp 0.8s ease-out 0.1s backwards;
+}
+
+body > div:nth-of-type(3) {
+    animation: fadeInUp 1s ease-out 0.2s backwards;
+}
+
+body > div:nth-of-type(4) {
+    animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+
+body > div:last-of-type {
+    animation: fadeInUp 1s ease-out 0.4s backwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    #videoRegister, #photo {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+    }
+
+    body > div:nth-of-type(3),
+    body > div:nth-of-type(4) {
+        padding: 15px;
+        width: 100%;
+        max-width: 390px;
+    }
+
+    body > div:last-of-type {
+        flex-direction: column;
+        width: 100%;
+        max-width: 350px;
+    }
+
+    #cap, #saveinput {
+        width: 100%;
+    }
+
+    #showName {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #cap, #saveinput {
+        font-size: 16px;
+        padding: 12px 30px;
+    }
 }

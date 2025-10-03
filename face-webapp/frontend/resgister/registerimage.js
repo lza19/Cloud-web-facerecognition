@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         .then(res => {
             if(!res.ok){
-                alert("ส่งข้อมูลสำเร็จ");
+                alert("ส่งข้อมูลไม่สำเร็จ");
             }
             if(res.ok){
                 alert("ส่งข้อมูลสำเร็จ");

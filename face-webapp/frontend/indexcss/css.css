@@ -1,34 +1,131 @@
-body{
-    background-color: rgb(194, 194, 193);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* หัวข้อ */
+.topic {
+    color: rgb(0, 0, 0);
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 60px;
+    text-shadow: 3px 3px 15px rgba(255, 49, 49, 0.3);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Container ปุ่ม */
 .container3 {
     display: flex;
-    width: 100%;
-    height: 100vh;
-}
-
-.topic{
-    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
     justify-content: center;
-    font-size: 50px;
-
 }
 
+/* สไตล์ปุ่มทั่วไป */
+.l1, .l2 {
+    padding: 25px 60px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    min-width: 250px;
+}
+
+/* ปุ่ม Register - Gradient ม่วง-ชมพู */
 .l2 {
-    flex: 1;
-    height: 100%;
-    font-size: 2em;
-    background-color: rgb(194, 194, 193);
-    border-radius: 10px; 
-    border: none;
+    background: linear-gradient(135deg, #000000 0%, #817b88 100%);
+    color: white;
 }
 
-.l1{
-    margin-left: 5px;
-    flex: 1;
-    height: 100%;
-    font-size: 2em;
-    background-color: rgb(194, 194, 193);
-    border-radius: 10px;
-    border: none;
+.l2:hover {
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* ปุ่ม Verify - Gradient ฟ้า-เขียว */
+.l1 {
+    background: linear-gradient(135deg, #000000 0%, #b9b4c4 100%);
+    color: white;
+}
+
+.l1:hover {
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(79, 172, 254, 0.5);
+}
+
+/* เอฟเฟกต์กด */
+.l1:active, .l2:active {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation เมื่อโหลดหน้า */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.topic {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.container3 {
+    animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .topic {
+        font-size: 2em;
+        margin-bottom: 40px;
+    }
+
+    .container3 {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .l1, .l2 {
+        width: 100%;
+        max-width: 350px;
+        padding: 20px 40px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .topic {
+        font-size: 1.5em;
+    }
+
+    .l1, .l2 {
+        font-size: 18px;
+        padding: 18px 30px;
+    }
 }

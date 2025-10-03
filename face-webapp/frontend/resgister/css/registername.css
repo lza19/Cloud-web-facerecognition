@@ -1,31 +1,166 @@
-body {
-    background-color: #262727;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+* {
     margin: 0;
-    
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1 {
-    color: rgb(255, 255, 255);
-    font-size: 10px;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ปุ่มกลับ */
+.back {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+
+#back {
+    display: inline-block;
+    padding: 12px 24px;
+    background: white;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+#back:hover {
+    background: #f0f4ff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* หัวข้อ */
+.bname {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.bname h1 {
+    color: rgb(0, 0, 0);
+    font-size: 2.5em;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+/* ส่วน Input และปุ่ม */
+.input2 {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Input ชื่อ */
+#nameInput {
+    padding: 15px 20px;
+    font-size: 18px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s;
+    background: #f8f9fa;
+}
+
+#nameInput:focus {
+    border-color: #000000;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+#nameInput::placeholder {
+    color: #999;
+}
+
+/* ปุ่มตกลง */
+#savename {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #000000 0%, #696969 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+#savename:hover {
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(79, 172, 254, 0.5);
+}
+
+#savename:active {
+    transform: translateY(-1px);
+}
+
+/* Animation เมื่อโหลด */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .back {
-    position: absolute;
-    left: 20px;
-    top: 20px;
+    animation: fadeInUp 0.6s ease-out;
 }
 
 .bname {
-    background-color: #262727;
-    width: 230px;
-    margin: 0px;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
-input, button {
-    margin: 5px; 
+.input2 {
+    animation: fadeInUp 1s ease-out 0.4s backwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bname h1 {
+        font-size: 2em;
+    }
+
+    .input2 {
+        padding: 30px 20px;
+        max-width: 90%;
+    }
+
+    #nameInput, #savename {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bname h1 {
+        font-size: 1.8em;
+    }
+
+    .input2 {
+        padding: 25px 15px;
+    }
+
+    #nameInput, #savename {
+        font-size: 15px;
+        padding: 12px 18px;
+    }
 }

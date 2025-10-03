@@ -1,43 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: rgb(255, 255, 255);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ปุ่มกลับ */
+.to {
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 20px;
+}
+
+#back {
+    display: inline-block;
+    padding: 12px 24px;
+    background: white;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+#back:hover {
+    background: #f0f4ff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* หัวข้อ */
+.tomain {
+    margin-bottom: 30px;
+}
+
+.topic h1 {
+    color: rgb(0, 0, 0);
+    font-size: 2.5em;
     text-align: center;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
 }
 
-.video{
+/* ส่วนวิดีโอ */
+.s {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    gap: 30px;
     justify-content: center;
-}
-.button{
-    margin-top: 40px;
-}
-.button .button1{
-    width: 100px;
-}
-.button .button2{
-    width: 100px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
 }
 
-.video .video1{
-    background-color: rgb(20, 23, 26);
-    
+.video, .resulvideo {
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
-.s{
+.video1 {
+    border-radius: 15px;
+    border: 4px solid #000000;
+    display: block;
+}
+
+#canvas {
+    border-radius: 15px;
+}
+
+#photo {
+    border-radius: 15px;
+    border: 4px solid #000000;
+    max-width: 400px;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* ปุ่มกด */
+.button {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    gap: 20px;
     justify-content: center;
-    background-color: rgb(255, 255, 255);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
 }
-.s .resulvideo{
-    margin: 15px;
+
+.button1, .button2 {
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
-.to{
-    position: absolute;
-    left: 20px;
-    top: 20px;
+
+.button1 {
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    color: white;
+}
+
+.button1:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+}
+
+.button2 {
+    background: linear-gradient(135deg, #00ff37 0%, #48ff00 100%);
+    color: white;
+}
+
+.button2:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(79, 172, 254, 0.4);
+}
+
+.button1:active, .button2:active {
+    transform: translateY(-1px);
+}
+
+/* ผลลัพธ์ */
+
+/* Responsive */
+@media (max-width: 768px) {
+    .topic h1 {
+        font-size: 2em;
+    }
+
+    .s {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .video1, #photo {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+    }
+
+    .button {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button1, .button2 {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    #result {
+        font-size: 1.4em;
+        padding: 15px 20px;
+    }
 }
