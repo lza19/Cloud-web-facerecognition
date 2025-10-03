@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append("image", imageBlob, "photo.png");
 
-        fetch("http://localhost:8000/vertify", {
+        fetch("https://veg587zs.duckdns.org/vertify", {
             method: "POST",
             body: formData
         })

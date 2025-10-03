@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append("name", username);
         formData.append("image", imageBlob, "photo.png");
 
-        fetch("http://localhost:8000/upload", {
+        fetch("https://veg587zs.duckdns.org/upload", {
             method: "POST",
             body: formData
         })
