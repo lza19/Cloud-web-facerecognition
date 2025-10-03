@@ -125,7 +125,7 @@ handler = Mangum(app)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://cloud-project-six-rho.vercel.app"], #"http://127.0.0.1:5500" https://veg587zs.duckdns.org/vertify
+    allow_origins=["https://cloud-project-six-rho.vercel.app"], #"http://127.0.0.1:5500" https://zs.duckdns.org/vertify
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
