@@ -1,1 +1,1 @@
-https://cloud-project-six-rho.vercel.app/
+python 3.10.9
